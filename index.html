@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOMP - Sneakers That Hit Different</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'stomp-red': '#E10600',
+                        'stomp-grey': '#B0B0B0',
+                    },
+                    fontFamily: {
+                        'oswald': ['Oswald', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-inter overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-2xl font-oswald font-bold text-stomp-red">
+                        STOMP
+                        <span class="text-stomp-red">|</span>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-stomp-red transition-colors font-medium">DROPS</a>
+                    <a href="#" class="text-gray-700 hover:text-stomp-red transition-colors font-medium">BRANDS</a>
+                    <a href="#" class="text-gray-700 hover:text-stomp-red transition-colors font-medium">ABOUT</a>
+                    <button class="bg-stomp-red text-white px-6 py-2 rounded-none font-medium hover:bg-red-700 transition-colors">
+                        CART (0)
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-700 hover:text-stomp-red">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen overflow-hidden bg-gradient-to-br from-white via-gray-50 to-gray-100" id="hero">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-r from-stomp-red/5 via-transparent to-stomp-red/10" id="bg-gradient"></div>
+        
+        <!-- Floating Sneaker Layers -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="hero-sneaker-layer-1 absolute top-1/4 right-1/4 w-96 h-96 opacity-20">
+                <div class="w-full h-full bg-gradient-to-br from-stomp-red to-red-600 transform rotate-12 rounded-3xl"></div>
+            </div>
+            <div class="hero-sneaker-layer-2 absolute top-1/3 right-1/3 w-80 h-80 opacity-30">
+                <div class="w-full h-full bg-gradient-to-br from-stomp-red/70 to-red-500/70 transform -rotate-6 rounded-2xl"></div>
+            </div>
+            <div class="hero-sneaker-layer-3 absolute top-1/2 right-1/2 w-64 h-64 opacity-40">
+                <div class="w-full h-full bg-stomp-red transform rotate-3 rounded-xl"></div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+            <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                <!-- Text Content -->
+                <div class="space-y-8" id="hero-content">
+                    <div class="space-y-4">
+                        <h1 class="text-6xl lg:text-8xl font-oswald font-bold text-gray-900 leading-none tracking-tight">
+                            SNEAKERS
+                            <br>
+                            <span class="text-stomp-red">THAT HIT</span>
+                            <br>
+                            DIFFERENT
+                        </h1>
+                        <p class="text-xl lg:text-2xl text-gray-600 font-light max-w-lg">
+                            Next-gen streetwear. Designed to stand out.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-stomp-red text-white px-8 py-4 text-lg font-bold font-oswald tracking-wide hover:bg-red-700 transition-all duration-300 transform hover:scale-105" id="cta-button">
+                            SHOP THE DROP
+                        </button>
+                        <button class="border-2 border-stomp-red text-stomp-red px-8 py-4 text-lg font-bold font-oswald tracking-wide hover:bg-stomp-red hover:text-white transition-all duration-300">
+                            EXPLORE BRANDS
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hero Sneaker Image -->
+                <div class="relative" id="hero-sneaker">
+                    <div class="relative z-10 transform hover:scale-105 transition-transform duration-500">
+                        <!-- Placeholder for main sneaker image -->
+                        <div class="w-full h-96 bg-gradient-to-br from-stomp-red via-red-600 to-red-800 rounded-2xl shadow-2xl flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl font-oswald font-bold mb-2">STOMP</div>
+                                <div class="text-lg">HERO SNEAKER</div>
+                                <div class="text-sm opacity-75 mt-2">Replace with actual sneaker image</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center font-bold text-stomp-red">
+                        🔥
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-stomp-red rounded-full shadow-lg"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20" id="scroll-indicator">
+            <div class="flex flex-col items-center space-y-2 text-gray-600">
+                <span class="text-sm font-medium">SCROLL</span>
+                <div class="w-px h-8 bg-stomp-red animate-pulse"></div>
+                <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="py-20 bg-white" id="featured-products">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-oswald font-bold text-gray-900 mb-4">FEATURED DROPS</h2>
+                <p class="text-xl text-gray-600">The hottest releases that define the culture</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <div class="text-lg font-bold">SNEAKER 1</div>
+                                <div class="text-sm">Image Placeholder</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-stomp-red text-white px-2 py-1 text-xs font-bold rounded">
+                            🔥 TRENDING
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">STOMP AIR MAX</h3>
+                        <p class="text-gray-600 mb-4">Limited Edition Street Runner</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-stomp-red">$189</span>
+                            <button class="bg-stomp-red text-white px-4 py-2 text-sm font-bold hover:bg-red-700 transition-colors">
+                                ADD TO BAG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <div class="text-lg font-bold">SNEAKER 2</div>
+                                <div class="text-sm">Image Placeholder</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">STOMP FORCE 1</h3>
+                        <p class="text-gray-600 mb-4">Classic Court Performance</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-stomp-red">$149</span>
+                            <button class="bg-stomp-red text-white px-4 py-2 text-sm font-bold hover:bg-red-700 transition-colors">
+                                ADD TO BAG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <div class="text-lg font-bold">SNEAKER 3</div>
+                                <div class="text-sm">Image Placeholder</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">STOMP RUNNER</h3>
+                        <p class="text-gray-600 mb-4">Ultra-Light Performance</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-stomp-red">$229</span>
+                            <button class="bg-stomp-red text-white px-4 py-2 text-sm font-bold hover:bg-red-700 transition-colors">
+                                ADD TO BAG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <div class="text-lg font-bold">SNEAKER 4</div>
+                                <div class="text-sm">Image Placeholder</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">STOMP BOOST</h3>
+                        <p class="text-gray-600 mb-4">Energy Return Technology</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-stomp-red">$199</span>
+                            <button class="bg-stomp-red text-white px-4 py-2 text-sm font-bold hover:bg-red-700 transition-colors">
+                                ADD TO BAG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About/Craft Section -->
+    <section class="py-20 bg-stomp-red text-white relative overflow-hidden" id="about-section">
+        <div class="absolute inset-0 bg-gradient-to-br from-stomp-red via-red-600 to-red-800"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8" id="craft-content">
+                    <div class="space-y-4">
+                        <h2 class="text-6xl font-oswald font-bold leading-tight">
+                            CRAFTED
+                            <br>
+                            FOR
+                            <br>
+                            <span class="text-white/90">CULTURE</span>
+                        </h2>
+                        <p class="text-xl text-white/90 leading-relaxed">
+                            Every STOMP sneaker is meticulously designed with premium materials and cutting-edge technology. We don't just make shoes – we create statements that define street culture.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-6 pt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-oswald">100+</div>
+                            <div class="text-sm text-white/80">EXCLUSIVE DROPS</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-oswald">50K+</div>
+                            <div class="text-sm text-white/80">SATISFIED CUSTOMERS</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold font-oswald">24/7</div>
+                            <div class="text-sm text-white/80">CUSTOMER SUPPORT</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative" id="craft-images">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="h-48 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
+                                <div class="text-center text-white/80">
+                                    <div class="text-sm font-bold">DETAIL SHOT 1</div>
+                                    <div class="text-xs">Stitching & Craftsmanship</div>
+                                </div>
+                            </div>
+                            <div class="h-32 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
+                                <div class="text-center text-white/80">
+                                    <div class="text-sm font-bold">DETAIL SHOT 2</div>
+                                    <div class="text-xs">Premium Materials</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <div class="h-32 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
+                                <div class="text-center text-white/80">
+                                    <div class="text-sm font-bold">DETAIL SHOT 3</div>
+                                    <div class="text-xs">Sole Technology</div>
+                                </div>
+                            </div>
+                            <div class="h-48 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
+                                <div class="text-center text-white/80">
+                                    <div class="text-sm font-bold">DETAIL SHOT 4</div>
+                                    <div class="text-xs">Lace & Hardware</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-900 text-white" id="testimonials">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-oswald font-bold mb-4">WHAT THE CULTURE SAYS</h2>
+                <p class="text-xl text-gray-400">Real reviews from real sneakerheads</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-stomp-red rounded-full flex items-center justify-center text-white font-bold">
+                            MJ
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold">Mike Johnson</div>
+                            <div class="text-sm text-gray-400">Brooklyn, NY</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "STOMP sneakers are absolutely fire! The quality is unmatched and the design is straight heat. Been wearing them for months and they still look brand new."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-stomp-red rounded-full flex items-center justify-center text-white font-bold">
+                            AR
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold">Alex Rivera</div>
+                            <div class="text-sm text-gray-400">Los Angeles, CA</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "Finally found a brand that gets it. STOMP isn't just about sneakers, it's about culture. Every drop is a masterpiece."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-stomp-red rounded-full flex items-center justify-center text-white font-bold">
+                            SK
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold">Sarah Kim</div>
+                            <div class="text-sm text-gray-400">Chicago, IL</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "STOMP changed the game. Comfort meets style in the most incredible way. I get compliments everywhere I go!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-stomp-red text-white" id="newsletter">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-5xl font-oswald font-bold mb-4">GET THE DROP FIRST</h2>
+            <p class="text-xl text-white/90 mb-8">
+                Be the first to know about exclusive releases, limited drops, and special events.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" id="newsletter-form">
+                <input 
+                    type="email" 
+                    placeholder="Enter your email"
+                    class="flex-1 px-6 py-4 text-gray-900 bg-white rounded-none focus:outline-none focus:ring-2 focus:ring-white"
+                >
+                <button class="bg-white text-stomp-red px-8 py-4 font-bold font-oswald tracking-wide hover:bg-gray-100 transition-colors">
+                    SIGN UP
+                </button>
+            </div>
+            
+            <p class="text-sm text-white/70 mt-4">
+                No spam, just the hottest drops and exclusive access.
+            </p>
+        </div>
+    </section>
+
+    <!-- Sticky Footer CTA -->
+    <div class="fixed bottom-0 left-0 right-0 bg-stomp-red text-white py-4 px-4 transform translate-y-full transition-transform duration-300 z-40" id="sticky-footer">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <span class="font-bold">Ready to STOMP?</span>
+                <span class="text-sm text-white/80">Limited time offers available</span>
+            </div>
+            <div class="flex space-x-4">
+                <button class="bg-white text-stomp-red px-6 py-2 font-bold hover:bg-gray-100 transition-colors">
+                    SHOP NOW
+                </button>
+                <button class="border border-white text-white px-6 py-2 font-bold hover:bg-white hover:text-stomp-red transition-colors">
+                    VIEW CART
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="text-3xl font-oswald font-bold text-stomp-red">STOMP</div>
+                    <p class="text-gray-400">
+                        Sneakers that hit different. Defining street culture one drop at a time.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">TikTok</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-4">SHOP</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">New Releases</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Best Sellers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Limited Edition</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sale</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-4">SUPPORT</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Size Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Returns</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Shipping</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-4">COMPANY</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 STOMP. All rights reserved. Sneakers that hit different.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
