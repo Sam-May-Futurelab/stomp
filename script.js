@@ -8,37 +8,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ========================================
     // LOTTIE BACKGROUND ANIMATION
-    // ========================================    // Initialize Lottie animation for hero background
+    // ========================================
+    
+    // Initialize Lottie animation for hero background
     const heroLottieContainer = document.getElementById('hero-lottie');
     if (heroLottieContainer) {
         const lottieAnimation = lottie.loadAnimation({
             container: heroLottieContainer,
             renderer: 'svg',
             loop: true,
-            autoplay: false, // We'll start it manually for better control
-            path: 'images/hero-lottie.json',
-            rendererSettings: {
-                preserveAspectRatio: 'xMidYMid slice',
-                progressiveLoad: true
-            }
+            autoplay: true,
+            path: 'images/hero-lottie.json'
         });
         
-        // Wait for animation to load then start with smooth settings
-        lottieAnimation.addEventListener('data_ready', function() {
-            lottieAnimation.setSpeed(0.6); // Slower speed for smoother effect
-            lottieAnimation.play();
-        });
-        
-        // Force seamless looping by restarting at loop end
-        lottieAnimation.addEventListener('loopComplete', function() {
-            // No pause - immediately continue
-            lottieAnimation.goToAndPlay(0);
-        });
-        
-        // Fallback for complete event
-        lottieAnimation.addEventListener('complete', function() {
-            lottieAnimation.goToAndPlay(0);
-        });
+        // Optional: Control animation speed
+        lottieAnimation.setSpeed(0.8); // Slower, more subtle animation
     }
     
     // ========================================
@@ -225,7 +209,105 @@ document.addEventListener('DOMContentLoaded', function() {
             ease: "power2.out"
         }
     );
-      // Newsletter section animation
+      // User-Generated Content Wall animation
+    gsap.fromTo(".ugc-post",
+        {
+            scale: 0.8,
+            opacity: 0
+        },
+        {
+            scrollTrigger: {
+                trigger: "#user-content",
+                start: "top 75%",
+                toggleActions: "play none none reverse"
+            },
+            duration: 1,
+            scale: 1,
+            opacity: 1,
+            stagger: 0.1,
+            ease: "back.out(1.7)"
+        }
+    );
+    
+    // UGC section title animation
+    gsap.fromTo("#user-content h2",
+        {
+            y: 50,
+            opacity: 0
+        },
+        {
+            scrollTrigger: {
+                trigger: "#user-content",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            duration: 1,
+            y: 0,
+            opacity: 1,
+            ease: "power3.out"
+        }
+    );
+    
+    // Sneaker Care Guide animations
+    gsap.fromTo(".care-step",
+        {
+            x: -50,
+            opacity: 0
+        },
+        {
+            scrollTrigger: {
+                trigger: "#care-guide",
+                start: "top 75%",
+                toggleActions: "play none none reverse"
+            },
+            duration: 1,
+            x: 0,
+            opacity: 1,
+            stagger: 0.2,
+            ease: "power2.out"
+        }
+    );
+    
+    // Care tips cards animation
+    gsap.fromTo(".care-tip-card",
+        {
+            y: 40,
+            opacity: 0
+        },
+        {
+            scrollTrigger: {
+                trigger: ".care-tip-card",
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            duration: 0.8,
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            ease: "power2.out"
+        }
+    );
+    
+    // Care guide section title animation
+    gsap.fromTo("#care-guide h2",
+        {
+            y: 60,
+            opacity: 0
+        },
+        {
+            scrollTrigger: {
+                trigger: "#care-guide",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            duration: 1.2,
+            y: 0,
+            opacity: 1,
+            ease: "power3.out"
+        }
+    );
+    
+    // Newsletter section animation
     gsap.fromTo("#newsletter-form",
         {
             scale: 0.9,
@@ -563,3 +645,120 @@ preloadResources.forEach(url => {
 
 // Service Worker would go here in production
 // Currently disabled to avoid 404 errors in development
+
+// ========================================
+// UGC IMAGE MODAL FUNCTIONALITY
+// ========================================
+
+// UGC data with usernames and likes
+const ugcData = {
+    'ugc-1.png': { username: '@sneakerhead_mike', likes: '2.1k' },
+    'ugc-2.png': { username: '@urban_alex', likes: '1.8k' },
+    'ugc-3.png': { username: '@style_sarah', likes: '3.2k' },
+    'ugc-4.png': { username: '@collector_jay', likes: '4.1k' },
+    'ugc-5.png': { username: '@fit_check_daily', likes: '2.7k' },
+    'ugc-6.png': { username: '@sneaker_culture', likes: '5.3k' },
+    'ugc-7.png': { username: '@street_vibes', likes: '1.9k' },
+    'ugc-8.png': { username: '@fresh_kicks', likes: '3.8k' }
+};
+
+function initUGCModal() {
+    const modal = document.getElementById('ugc-modal');
+    const closeButton = document.getElementById('close-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalUsername = document.getElementById('modal-username');
+    const modalLikes = document.getElementById('modal-likes').querySelector('span:last-child');
+    
+    // Debug: Check if elements exist
+    console.log('UGC Modal Elements:', {
+        modal: !!modal,
+        closeButton: !!closeButton,
+        modalImage: !!modalImage,
+        modalUsername: !!modalUsername,
+        modalLikes: !!modalLikes
+    });
+    
+    if (!modal) {
+        console.error('UGC Modal not found in DOM');
+        return;
+    }
+    
+    // Add click listeners to UGC posts
+    const ugcPosts = document.querySelectorAll('.ugc-post');
+    console.log('Found UGC posts:', ugcPosts.length);
+    
+    ugcPosts.forEach((post, index) => {
+        console.log(`Adding click listener to UGC post ${index + 1}`);
+        post.addEventListener('click', function(e) {
+            console.log('UGC post clicked!', this);
+            const img = this.querySelector('img');
+            if (!img || img.style.display === 'none') {
+                console.log('No valid image found in clicked post');
+                return;
+            }
+            
+            const imageSrc = img.src;
+            const imageName = imageSrc.split('/').pop();
+            const data = ugcData[imageName] || { username: '@stomp_user', likes: '1.2k' };
+            
+            console.log('Opening modal for:', imageName, data);
+            
+            // Set modal content
+            modalImage.src = imageSrc;
+            modalImage.alt = img.alt;
+            modalUsername.textContent = data.username;
+            modalLikes.textContent = data.likes;
+            
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Animate modal appearance
+            gsap.fromTo(modal, 
+                { opacity: 0 },
+                { opacity: 1, duration: 0.3 }
+            );
+              gsap.fromTo(modal.querySelector('.relative'),
+                { scale: 0.8, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.7)" }
+            );
+        });
+    });
+    
+    // Close modal function
+    function closeModal() {
+        gsap.to(modal, {
+            opacity: 0,
+            duration: 0.2,
+            onComplete: () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        });
+    }
+    
+    // Close button click
+    closeButton.addEventListener('click', closeModal);
+    
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Escape key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+}
+
+// Initialize UGC modal when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUGCModal);
+} else {
+    // DOM is already loaded
+    initUGCModal();
+}
