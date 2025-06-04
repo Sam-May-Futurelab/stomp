@@ -43,10 +43,14 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
+            <div class="flex justify-between items-center h-16">                <!-- Logo -->
                 <div class="flex items-center">
-                    <div class="text-2xl font-oswald font-bold text-stomp-red">
+                    <img src="images/stomp-logo.svg" 
+                         alt="STOMP" 
+                         class="h-8 w-auto"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <!-- Fallback text logo -->
+                    <div class="text-2xl font-oswald font-bold text-stomp-red hidden">
                         STOMP
                         <span class="text-stomp-red">|</span>
                     </div>
@@ -72,23 +76,44 @@
                 </div>
             </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
+    </nav>    <!-- Hero Section -->
     <section class="relative min-h-screen overflow-hidden bg-gradient-to-br from-white via-gray-50 to-gray-100" id="hero">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-gradient-to-r from-stomp-red/5 via-transparent to-stomp-red/10" id="bg-gradient"></div>
+        <!-- Lottie Background Animation -->
+        <div class="absolute inset-0 z-0" id="lottie-container">
+            <div id="hero-lottie" class="w-full h-full opacity-60"></div>
+        </div>
         
-        <!-- Floating Sneaker Layers -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="hero-sneaker-layer-1 absolute top-1/4 right-1/4 w-96 h-96 opacity-20">
-                <div class="w-full h-full bg-gradient-to-br from-stomp-red to-red-600 transform rotate-12 rounded-3xl"></div>
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-r from-stomp-red/5 via-transparent to-stomp-red/10 z-1" id="bg-gradient"></div>        <!-- Floating Sneaker Layers -->
+        <div class="absolute inset-0 pointer-events-none z-2">
+            <!-- Layer 1 - Shadow/Background Sneaker -->
+            <div class="hero-sneaker-layer-1 absolute top-1/4 right-1/4 w-96 h-96 opacity-30">
+                <img src="images/hero-sneaker-shadow-1.png" 
+                     alt="Shadow Sneaker" 
+                     class="w-full h-full object-contain transform rotate-12"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <!-- Fallback red square -->
+                <div class="w-full h-full bg-gradient-to-br from-stomp-red to-red-600 transform rotate-12 rounded-3xl hidden"></div>
             </div>
-            <div class="hero-sneaker-layer-2 absolute top-1/3 right-1/3 w-80 h-80 opacity-30">
-                <div class="w-full h-full bg-gradient-to-br from-stomp-red/70 to-red-500/70 transform -rotate-6 rounded-2xl"></div>
+            
+            <!-- Layer 2 - Secondary Sneaker -->
+            <div class="hero-sneaker-layer-2 absolute top-1/3 right-1/3 w-80 h-80 opacity-25">
+                <img src="images/hero-sneaker-side.png" 
+                     alt="Side Sneaker" 
+                     class="w-full h-full object-contain transform -rotate-6"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <!-- Fallback red square -->
+                <div class="w-full h-full bg-gradient-to-br from-stomp-red/70 to-red-500/70 transform -rotate-6 rounded-2xl hidden"></div>
             </div>
-            <div class="hero-sneaker-layer-3 absolute top-1/2 right-1/2 w-64 h-64 opacity-40">
-                <div class="w-full h-full bg-stomp-red transform rotate-3 rounded-xl"></div>
+            
+            <!-- Layer 3 - Accent Sneaker -->
+            <div class="hero-sneaker-layer-3 absolute top-1/2 right-1/2 w-64 h-64 opacity-20">
+                <img src="images/hero-sneaker-back.png" 
+                     alt="Back Sneaker" 
+                     class="w-full h-full object-contain transform rotate-3"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <!-- Fallback red square -->
+                <div class="w-full h-full bg-stomp-red transform rotate-3 rounded-xl hidden"></div>
             </div>
         </div>
         
@@ -119,23 +144,26 @@
                         </button>
                     </div>
                 </div>
-                
-                <!-- Hero Sneaker Image -->
+                  <!-- Hero Sneaker Image -->
                 <div class="relative" id="hero-sneaker">
                     <div class="relative z-10 transform hover:scale-105 transition-transform duration-500">
-                        <!-- Placeholder for main sneaker image -->
-                        <div class="w-full h-96 bg-gradient-to-br from-stomp-red via-red-600 to-red-800 rounded-2xl shadow-2xl flex items-center justify-center">
+                        <!-- Main sneaker image -->
+                        <img src="images/hero-sneaker-main.png" 
+                             alt="STOMP Hero Sneaker" 
+                             class="w-full h-96 object-contain rounded-2xl shadow-2xl"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <!-- Fallback placeholder -->
+                        <div class="w-full h-96 bg-gradient-to-br from-stomp-red via-red-600 to-red-800 rounded-2xl shadow-2xl hidden items-center justify-center">
                             <div class="text-white text-center">
                                 <div class="text-4xl font-oswald font-bold mb-2">STOMP</div>
                                 <div class="text-lg">HERO SNEAKER</div>
-                                <div class="text-sm opacity-75 mt-2">Replace with actual sneaker image</div>
+                                <div class="text-sm opacity-75 mt-2">Image not found</div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Floating Elements -->
+                      <!-- Floating Elements -->
                     <div class="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center font-bold text-stomp-red">
-                        🔥
+                        NEW
                     </div>
                     <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-stomp-red rounded-full shadow-lg"></div>
                 </div>
@@ -162,18 +190,19 @@
                 <p class="text-xl text-gray-600">The hottest releases that define the culture</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Product 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">                <!-- Product 1 -->
                 <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="relative">                        <img src="images/product-1.png" 
+                             alt="STOMP AIR MAX" 
+                             class="w-full h-64 object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 hidden items-center justify-center">
                             <div class="text-center text-gray-500">
                                 <div class="text-lg font-bold">SNEAKER 1</div>
-                                <div class="text-sm">Image Placeholder</div>
+                                <div class="text-sm">Image not found</div>
                             </div>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-stomp-red text-white px-2 py-1 text-xs font-bold rounded">
-                            🔥 TRENDING
+                        </div><div class="absolute top-4 right-4 bg-stomp-red text-white px-2 py-1 text-xs font-bold rounded">
+                            TRENDING
                         </div>
                     </div>
                     <div class="p-6">
@@ -187,14 +216,16 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Product 2 -->
+                  <!-- Product 2 -->
                 <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="relative">                        <img src="images/product-2.png" 
+                             alt="STOMP FORCE 1" 
+                             class="w-full h-64 object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 hidden items-center justify-center">
                             <div class="text-center text-gray-500">
                                 <div class="text-lg font-bold">SNEAKER 2</div>
-                                <div class="text-sm">Image Placeholder</div>
+                                <div class="text-sm">Image not found</div>
                             </div>
                         </div>
                     </div>
@@ -209,14 +240,16 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Product 3 -->
+                  <!-- Product 3 -->
                 <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="relative">                        <img src="images/product-3.png" 
+                             alt="STOMP RUNNER" 
+                             class="w-full h-64 object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 hidden items-center justify-center">
                             <div class="text-center text-gray-500">
                                 <div class="text-lg font-bold">SNEAKER 3</div>
-                                <div class="text-sm">Image Placeholder</div>
+                                <div class="text-sm">Image not found</div>
                             </div>
                         </div>
                     </div>
@@ -231,14 +264,16 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Product 4 -->
+                  <!-- Product 4 -->
                 <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="relative">                        <img src="images/product-4.png" 
+                             alt="STOMP BOOST" 
+                             class="w-full h-64 object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 hidden items-center justify-center">
                             <div class="text-center text-gray-500">
                                 <div class="text-lg font-bold">SNEAKER 4</div>
-                                <div class="text-sm">Image Placeholder</div>
+                                <div class="text-sm">Image not found</div>
                             </div>
                         </div>
                     </div>
@@ -292,34 +327,52 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="relative" id="craft-images">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="space-y-4">
-                            <div class="h-48 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
-                                <div class="text-center text-white/80">
-                                    <div class="text-sm font-bold">DETAIL SHOT 1</div>
-                                    <div class="text-xs">Stitching & Craftsmanship</div>
+                  <div class="relative" id="craft-images">                    <div class="grid grid-cols-2 gap-6">
+                        <div class="space-y-6">
+                            <div class="h-72 rounded-xl overflow-hidden">                                <img src="images/detail-stitching.png" 
+                                     alt="Stitching & Craftsmanship" 
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="h-full bg-white/20 backdrop-blur-sm hidden items-center justify-center">
+                                    <div class="text-center text-white/80">
+                                        <div class="text-sm font-bold">DETAIL SHOT 1</div>
+                                        <div class="text-xs">Stitching & Craftsmanship</div>
+                                    </div>
+                                </div>                            </div>
+                            <div class="h-56 rounded-xl overflow-hidden">
+                                <img src="images/detail-material.png" 
+                                     alt="Premium Materials" 
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="h-full bg-white/20 backdrop-blur-sm hidden items-center justify-center">
+                                    <div class="text-center text-white/80">
+                                        <div class="text-sm font-bold">DETAIL SHOT 2</div>
+                                        <div class="text-xs">Premium Materials</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="h-32 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
-                                <div class="text-center text-white/80">
-                                    <div class="text-sm font-bold">DETAIL SHOT 2</div>
-                                    <div class="text-xs">Premium Materials</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space-y-4 pt-8">
-                            <div class="h-32 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
-                                <div class="text-center text-white/80">
-                                    <div class="text-sm font-bold">DETAIL SHOT 3</div>
-                                    <div class="text-xs">Sole Technology</div>
-                                </div>
-                            </div>
-                            <div class="h-48 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
-                                <div class="text-center text-white/80">
-                                    <div class="text-sm font-bold">DETAIL SHOT 4</div>
-                                    <div class="text-xs">Lace & Hardware</div>
+                        </div>                        <div class="space-y-6 pt-12">
+                            <div class="h-56 rounded-xl overflow-hidden">
+                                <img src="images/detail-sole.png" 
+                                     alt="Sole Technology" 
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="h-full bg-white/20 backdrop-blur-sm hidden items-center justify-center">
+                                    <div class="text-center text-white/80">
+                                        <div class="text-sm font-bold">DETAIL SHOT 3</div>
+                                        <div class="text-xs">Sole Technology</div>
+                                    </div>
+                                </div>                            </div>
+                            <div class="h-72 rounded-xl overflow-hidden">
+                                <img src="images/detail-laces.png" 
+                                     alt="Lace & Hardware" 
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="h-full bg-white/20 backdrop-blur-sm hidden items-center justify-center">
+                                    <div class="text-center text-white/80">
+                                        <div class="text-sm font-bold">DETAIL SHOT 4</div>
+                                        <div class="text-xs">Lace & Hardware</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -337,11 +390,13 @@
                 <p class="text-xl text-gray-400">Real reviews from real sneakerheads</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonials-grid">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonials-grid">                <!-- Testimonial 1 -->                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-stomp-red rounded-full flex items-center justify-center text-white font-bold">
+                        <img src="images/profile-1.png" 
+                             alt="Mike Johnson" 
+                             class="w-12 h-12 rounded-full object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-12 h-12 bg-stomp-red rounded-full hidden items-center justify-center text-white font-bold">
                             MJ
                         </div>
                         <div class="ml-4">
@@ -356,11 +411,13 @@
                         "STOMP sneakers are absolutely fire! The quality is unmatched and the design is straight heat. Been wearing them for months and they still look brand new."
                     </p>
                 </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
+                  <!-- Testimonial 2 -->                <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-stomp-red rounded-full flex items-center justify-center text-white font-bold">
+                        <img src="images/profile-2.png" 
+                             alt="Alex Rivera" 
+                             class="w-12 h-12 rounded-full object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-12 h-12 bg-stomp-red rounded-full hidden items-center justify-center text-white font-bold">
                             AR
                         </div>
                         <div class="ml-4">
@@ -374,12 +431,14 @@
                     <p class="text-gray-300 italic">
                         "Finally found a brand that gets it. STOMP isn't just about sneakers, it's about culture. Every drop is a masterpiece."
                     </p>
-                </div>
-                
-                <!-- Testimonial 3 -->
+                </div>                  <!-- Testimonial 3 -->
                 <div class="testimonial-card bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-colors duration-300">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-stomp-red rounded-full flex items-center justify-center text-white font-bold">
+                        <img src="images/profile-3.png" 
+                             alt="Sarah Kim" 
+                             class="w-12 h-12 rounded-full object-cover"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-12 h-12 bg-stomp-red rounded-full hidden items-center justify-center text-white font-bold">
                             SK
                         </div>
                         <div class="ml-4">
@@ -444,9 +503,13 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="space-y-4">
-                    <div class="text-3xl font-oswald font-bold text-stomp-red">STOMP</div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">                <div class="space-y-4">
+                    <img src="images/stomp-logo.svg" 
+                         alt="STOMP" 
+                         class="h-10 w-auto"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <!-- Fallback text logo -->
+                    <div class="text-3xl font-oswald font-bold text-stomp-red hidden">STOMP</div>
                     <p class="text-gray-400">
                         Sneakers that hit different. Defining street culture one drop at a time.
                     </p>
@@ -487,13 +550,16 @@
                     </ul>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+              <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
                 <p>&copy; 2025 STOMP. All rights reserved. Sneakers that hit different.</p>
+                <p class="mt-2 text-sm">
+                    Designed by <a href="https://www.futurelab.solutions/" target="_blank" rel="noopener noreferrer" class="text-stomp-red hover:text-red-400 transition-colors font-medium">FutureLab</a>
+                </p>
             </div>
         </div>
-    </footer>
-
+    </footer>    <!-- Lottie Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>

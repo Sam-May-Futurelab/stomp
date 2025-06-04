@@ -7,6 +7,41 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener('DOMContentLoaded', function() {
     
     // ========================================
+    // LOTTIE BACKGROUND ANIMATION
+    // ========================================    // Initialize Lottie animation for hero background
+    const heroLottieContainer = document.getElementById('hero-lottie');
+    if (heroLottieContainer) {
+        const lottieAnimation = lottie.loadAnimation({
+            container: heroLottieContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: false, // We'll start it manually for better control
+            path: 'images/hero-lottie.json',
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+                progressiveLoad: true
+            }
+        });
+        
+        // Wait for animation to load then start with smooth settings
+        lottieAnimation.addEventListener('data_ready', function() {
+            lottieAnimation.setSpeed(0.6); // Slower speed for smoother effect
+            lottieAnimation.play();
+        });
+        
+        // Force seamless looping by restarting at loop end
+        lottieAnimation.addEventListener('loopComplete', function() {
+            // No pause - immediately continue
+            lottieAnimation.goToAndPlay(0);
+        });
+        
+        // Fallback for complete event
+        lottieAnimation.addEventListener('complete', function() {
+            lottieAnimation.goToAndPlay(0);
+        });
+    }
+    
+    // ========================================
     // HERO SECTION ANIMATIONS
     // ========================================
     
